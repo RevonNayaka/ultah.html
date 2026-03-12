@@ -386,6 +386,7 @@
     document.getElementById('p1-msg2').textContent = CONFIG.pesanKartu;
     document.getElementById('p2-title').textContent = 'Selamat Ulang Tahun ' + CONFIG.nama + ' 🎂';
     document.getElementById('p2-foto').src = CONFIG.fotoUrl;
+    document.getElementById('p2-foto').alt = 'Foto ulang tahun ' + CONFIG.nama;
     document.getElementById('p2-pesan').innerHTML = CONFIG.pesanRomantis;
     var safeYtId = CONFIG.youtubeId.replace(/[^a-zA-Z0-9_-]/g, '');
     document.getElementById('yt-player').src =
