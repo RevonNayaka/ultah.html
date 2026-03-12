@@ -15,9 +15,32 @@ Atau kalau mau deploy online, upload `index.html` ke:
 
 ---
 
+## 🧪 Cara Coba di Trebedit
+
+**Trebedit** adalah editor HTML online — kamu bisa langsung paste kodenya tanpa install apapun.
+
+### Langkah-langkah:
+
+1. Buka **[trebedit.com](https://trebedit.com/)** di browser
+2. Buka file **[`index.html`](./index.html)** di repository ini (klik file-nya di GitHub)
+3. Klik tombol **Raw** (pojok kanan atas) untuk lihat kode mentah
+4. Tekan **Ctrl + A** (pilih semua) lalu **Ctrl + C** (copy)
+5. Di Trebedit, **hapus** semua kode yang ada lalu **Ctrl + V** (paste)
+6. Klik **▶ Run** atau **Preview** — halaman akan langsung muncul!
+
+> 💡 **Tips:** Kamu juga bisa klik **Raw** di bagian atas file [`index.html`](./index.html) di GitHub, lalu copy semua teksnya.
+
+### ⚠️ Catatan Trebedit:
+- **Animasi hujan** (❤️ 🌸) sudah berjalan otomatis ✅
+- **Tombol "Buka Pesannya"** akan fade ke halaman 2 ✅
+- **Tombol Putar Lagu** membutuhkan koneksi internet (YouTube) ✅
+- Jika lagu tidak bunyi di Trebedit, coba buka file langsung di Chrome/Firefox
+
+---
+
 ## 🖼️ Cara Ganti Foto
 
-Buka `index.html`, cari baris ini (sekitar baris 234):
+Buka `index.html`, cari tag `<img>` dengan `class="photo"`:
 
 ```html
 <img
