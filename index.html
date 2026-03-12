@@ -443,16 +443,16 @@
 
     // Add sparkles floating upward
     var sparkleEmojis = ['✨', '⭐', '💫', '🌟'];
-    for (var j = 0; j < 30; j++) {
+    for (var i = 0; i < 30; i++) {
       (function() {
         var sparkle = document.createElement('div');
         var emoji = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
         sparkle.className = 'sparkle';
         sparkle.textContent = emoji;
-        var left = Math.random() * 100;
+        var leftPosition = Math.random() * 100;
         var delay = Math.random() * 8;
         var duration = 6 + Math.random() * 4;
-        sparkle.style.left = left + 'vw';
+        sparkle.style.left = leftPosition + 'vw';
         sparkle.style.animationDelay = delay + 's';
         sparkle.style.animationDuration = duration + 's';
         document.body.appendChild(sparkle);
