@@ -38,26 +38,72 @@ Atau kalau mau deploy online, upload `index.html` ke:
 
 ---
 
-## 🖼️ Cara Ganti Foto
+## ✏️ Cara Mengubah Nama, Foto & Pesan
 
-Buka `index.html`, cari tag `<img>` dengan `class="photo"`:
+**Ya, bisa! Semua yang perlu diubah sudah dikumpulkan di satu tempat.**
 
-```html
-<img
-  class="photo"
-  src="https://i.imgur.com/6VBx8MA.png"
-  ...
-/>
+Buka `index.html`, cari bagian **`CONFIG`** di dalam `<script>` (ada di bagian bawah file):
+
+```javascript
+var CONFIG = {
+  // Nama orang yang berulang tahun
+  nama: 'Kamu',
+
+  // URL foto di halaman 2
+  fotoUrl: 'https://i.imgur.com/6VBx8MA.png',
+
+  // Pesan singkat di halaman pertama
+  pesanAwal: 'Hari ini adalah hari yang spesial,<br>karena hari ini kamu dilahirkan.',
+
+  // Kalimat ucapan terima kasih
+  pesanKartu: 'Terima kasih sudah menjadi seseorang yang begitu berarti.',
+
+  // Pesan panjang di halaman kedua
+  pesanRomantis: '...',
+
+  // ID video YouTube
+  youtubeId: 'MWfKVAep1ew',
+};
 ```
 
-Ganti URL `src` dengan link foto kamu. Bisa upload foto ke [imgur.com](https://imgur.com/) atau layanan hosting foto lainnya, lalu copy link-nya.
+Ubah nilai-nilainya sesuai kebutuhan, lalu **save** → **refresh** → halaman langsung berubah!
+
+### 🔧 Panduan per bagian:
+
+| Yang ingin diubah | Ubah nilai ini | Contoh |
+|---|---|---|
+| Nama penerima | `nama` | `'Sinta'` |
+| Foto | `fotoUrl` | URL foto dari imgur |
+| Pesan halaman 1 | `pesanAwal` | Teks sapaan |
+| Ucapan terima kasih | `pesanKartu` | Teks singkat |
+| Pesan panjang hal. 2 | `pesanRomantis` | Kata-kata romantis |
+| Lagu YouTube | `youtubeId` | ID video YouTube |
+
+### 🖼️ Cara Ganti Foto
+
+1. Buka **[imgur.com](https://imgur.com/)** → klik **New Post** → upload foto kamu
+2. Setelah upload, klik kanan gambar → **Copy Image Address**
+3. Paste URL tersebut ke `CONFIG.fotoUrl` di `index.html`
+
+### 🎵 Cara Ganti Lagu
+
+1. Buka video YouTube yang kamu mau di browser
+2. Salin ID-nya dari URL: `youtube.com/watch?v=`**`MWfKVAep1ew`** ← bagian ini
+3. Paste ke `CONFIG.youtubeId`
 
 ---
 
-## 🎵 Lagu
+## 🌐 Cara Hosting (Gratis)
 
-Tombol **"🎵 Putar Lagu Ulang Tahun"** akan memutar lagu *Selamat Ulang Tahun* dari YouTube.  
-Pastikan perangkat terhubung ke internet saat membuka halaman 2.
+Setelah kamu ubah `index.html`, upload ke salah satu platform berikut:
+
+| Platform | Cara Upload | Gratis |
+|---|---|---|
+| **GitHub Pages** | Push ke branch `main`, aktifkan Pages di Settings | ✅ |
+| **Netlify** | Drag & drop folder ke [netlify.com](https://netlify.com/) | ✅ |
+| **Vercel** | Import repo di [vercel.com](https://vercel.com/) | ✅ |
+
+> Setelah hosting, kalau mau ubah isi — cukup **edit `CONFIG` di `index.html`** lalu **push/upload ulang** filenya.
 
 ---
 

@@ -217,10 +217,10 @@
   <!-- HALAMAN 1 -->
   <div class="page page1" id="page1">
     <div class="card">
-      <h1>Selamat Ulang Tahun 🎉</h1>
-      <p>Hari ini adalah hari yang spesial,<br>karena hari ini kamu dilahirkan.</p>
+      <h1 id="p1-title">Selamat Ulang Tahun 🎉</h1>
+      <p id="p1-msg1">Hari ini adalah hari yang spesial,<br>karena hari ini kamu dilahirkan.</p>
       <div class="heart">❤️</div>
-      <p>Terima kasih sudah menjadi seseorang yang begitu berarti.</p>
+      <p id="p1-msg2">Terima kasih sudah menjadi seseorang yang begitu berarti.</p>
       <p style="font-size:15px; color:#aaa; margin-top:4px;">Ada sesuatu untukmu... 💌</p>
       <button onclick="nextPage()">Buka Pesannya ❤️</button>
     </div>
@@ -228,15 +228,16 @@
 
   <!-- HALAMAN 2 -->
   <div class="page page2" id="page2">
-    <!-- GANTI FOTO DI SINI: ubah src menjadi URL foto kamu -->
+    <!-- GANTI FOTO DI SINI: ubah CONFIG.fotoUrl di bagian script -->
     <img
+      id="p2-foto"
       class="photo"
       src="https://i.imgur.com/6VBx8MA.png"
       alt="Foto Orang Tersayang"
       onerror="this.src='https://placehold.co/200x200/ff99cc/fff?text=💕'"
     />
-    <h2 class="h2-title">Selamat Ulang Tahun 🎂</h2>
-    <p class="romantis">
+    <h2 id="p2-title" class="h2-title">Selamat Ulang Tahun 🎂</h2>
+    <p id="p2-pesan" class="romantis">
       Di antara banyaknya hari, kamu adalah alasan mengapa hari terasa lebih indah. <br><br>
       Semoga langkahmu selalu ringan, hatimu selalu hangat,<br>
       dan senyummu tak pernah kehilangan alasan. <br><br>
@@ -252,12 +253,56 @@
   <!-- YouTube player tersembunyi -->
   <iframe
     id="yt-player"
-    src="https://www.youtube.com/embed/MWfKVAep1ew?enablejsapi=1&autoplay=0"
+    src=""
     allow="autoplay"
     title="Selamat Ulang Tahun"
   ></iframe>
 
   <script>
+    // ╔══════════════════════════════════════════════════════════════════════╗
+    // ║  ✏️  KONFIGURASI — Edit bagian ini untuk mengubah nama, foto,      ║
+    // ║     pesan, dan lagu. Semua yang perlu diubah ada di sini!          ║
+    // ╠══════════════════════════════════════════════════════════════════════╣
+    var CONFIG = {
+      // Nama orang yang berulang tahun (muncul di judul halaman 1 & 2)
+      nama: 'Kamu',
+
+      // URL foto di halaman 2
+      // → Upload foto ke https://imgur.com lalu paste link langsung-nya di sini
+      fotoUrl: 'https://i.imgur.com/6VBx8MA.png',
+
+      // Pesan singkat di halaman pertama (boleh gunakan <br> untuk baris baru)
+      pesanAwal: 'Hari ini adalah hari yang spesial,<br>karena hari ini kamu dilahirkan.',
+
+      // Kalimat ucapan terima kasih di halaman pertama
+      pesanKartu: 'Terima kasih sudah menjadi seseorang yang begitu berarti.',
+
+      // Pesan panjang di halaman kedua (boleh gunakan <br> untuk baris baru)
+      pesanRomantis:
+        'Di antara banyaknya hari, kamu adalah alasan mengapa hari terasa lebih indah. <br><br>' +
+        'Semoga langkahmu selalu ringan, hatimu selalu hangat,<br>' +
+        'dan senyummu tak pernah kehilangan alasan. <br><br>' +
+        'Semoga setiap impianmu menjadi nyata, dan kebahagiaan<br>' +
+        'selalu mengikuti ke mana pun kamu melangkah. 🌸 <br><br>' +
+        '<strong>Selamat bertambah usia 🤍</strong>',
+
+      // ID video YouTube — ambil dari URL: youtube.com/watch?v=[ID_DI_SINI]
+      youtubeId: 'MWfKVAep1ew',
+    };
+    // ╚══════════════════════════════════════════════════════════════════════╝
+
+    // ─── Terapkan CONFIG ke halaman ──────────────────────────────────────────
+    document.title = 'Untuk ' + CONFIG.nama + ' ❤️';
+    document.getElementById('p1-title').textContent = 'Selamat Ulang Tahun ' + CONFIG.nama + ' 🎉';
+    document.getElementById('p1-msg1').innerHTML = CONFIG.pesanAwal;
+    document.getElementById('p1-msg2').textContent = CONFIG.pesanKartu;
+    document.getElementById('p2-title').textContent = 'Selamat Ulang Tahun ' + CONFIG.nama + ' 🎂';
+    document.getElementById('p2-foto').src = CONFIG.fotoUrl;
+    document.getElementById('p2-pesan').innerHTML = CONFIG.pesanRomantis;
+    var safeYtId = CONFIG.youtubeId.replace(/[^a-zA-Z0-9_-]/g, '');
+    document.getElementById('yt-player').src =
+      'https://www.youtube.com/embed/' + safeYtId + '?enablejsapi=1&autoplay=0';
+
     // ─── Navigasi antar halaman ───────────────────────────────────────────────
     function nextPage() {
       var p1 = document.getElementById('page1');
@@ -273,6 +318,7 @@
 
     function toggleMusic() {
       var btn = document.getElementById('musicBtn');
+      if (!player || !player.contentWindow) { return; }
       if (!isPlaying) {
         // Mulai putar
         player.contentWindow.postMessage(
