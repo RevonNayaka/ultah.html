@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Untuk Kamu ❤️</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    .font-size {
+      font-size: 36px;
+    }
+    .page {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 1s ease;
+      background-image: linear-gradient(to bottom, #ff69b4, #ff99cc);
+    }
+    .page1 {
+      z-index: 2;
+      flex-direction: column;
+      text-align: center;
+    }
+    .page2 {
+      opacity: 0;
+      z-index: 1;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+      pointer-events: none;
+    }
+    .page2.active {
+      z-index: 3;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    /* Amplop / intro animasi */
+    .envelope-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .envelope {
+      font-size: 100px;
+      animation: pulse 1.5s ease-in-out infinite;
+      cursor: pointer;
+      user-select: none;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    .intro-label {
+      font-size: 26px;
+      color: #fff;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .intro-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.85);
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+    /* Card Halaman 1 */
+    .card {
+      width: 85%;
+      max-width: 560px;
+      padding: 40px 36px;
+      background-color: #fff;
+      border-radius: 24px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      animation: fadeInUp 0.8s ease;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1 {
+      color: #ff69b4;
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #666;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+    .heart {
+      font-size: 56px;
+      margin: 16px 0;
+      display: inline-block;
+      animation: heartbeat 1.2s ease-in-out infinite;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      14% { transform: scale(1.2); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.15); }
+      70% { transform: scale(1); }
+    }
+    button {
+      margin-top: 24px;
+      padding: 14px 32px;
+      font-size: 17px;
+      border: none;
+      border-radius: 30px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 4px 14px rgba(255, 105, 180, 0.4);
+    }
+    button:hover {
+      background-color: #ff85c1;
+      transform: scale(1.05);
+    }
+    /* ===== HALAMAN 2 ===== */
+    .photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid #fff;
+      box-shadow: 0 0 24px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+      animation: fadeInUp 0.8s ease;
+    }
+    .romantis {
+      font-size: 20px;
+      color: #fff;
+      max-width: 600px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      line-height: 1.8;
+      animation: fadeInUp 0.8s ease 0.2s both;
+    }
+    .h2-title {
+      color: #fff;
+      font-size: 32px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+      margin-bottom: 6px;
+      animation: fadeInUp 0.8s ease 0.1s both;
+    }
+    /* Tombol musik */
+    .music-btn {
+      margin-top: 28px;
+      padding: 13px 30px;
+      font-size: 17px;
+      border: 2px solid rgba(255,255,255,0.6);
+      border-radius: 30px;
+      background-color: rgba(255, 255, 255, 0.25);
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+      animation: fadeInUp 0.8s ease 0.3s both;
+    }
+    .music-btn:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+      transform: scale(1.05);
+    }
+    .music-btn.playing {
+      background-color: rgba(255,255,255,0.5);
+    }
+    /* YouTube iframe tersembunyi */
+    #yt-player {
+      position: fixed;
+      bottom: -9999px;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      border: none;
+    }
+    /* HUJAN LOVE & BUNGA */
+    .love, .bunga {
+      position: fixed;
+      font-size: 28px;
+      animation: fall linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes fall {
+      0% {
+        top: -60px;
+        opacity: 1;
+      }
+      80% {
+        opacity: 0.8;
+      }
+      100% {
+        top: 110vh;
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HUJAN LOVE & BUNGA (dibuat via JS) -->
+
+  <!-- HALAMAN 1 -->
+  <div class="page page1" id="page1">
+    <div class="card">
+      <h1 id="p1-title">Selamat Ulang Tahun 🎉</h1>
+      <p id="p1-msg1">Hari ini adalah hari yang spesial,<br>karena hari ini kamu dilahirkan.</p>
+      <div class="heart">❤️</div>
+      <p id="p1-msg2">Terima kasih sudah menjadi seseorang yang begitu berarti.</p>
+      <p style="font-size:15px; color:#aaa; margin-top:4px;">Ada sesuatu untukmu... 💌</p>
+      <button onclick="nextPage()">Buka Pesannya ❤️</button>
+    </div>
+  </div>
+
+  <!-- HALAMAN 2 -->
+  <div class="page page2" id="page2">
+    <!-- GANTI FOTO DI SINI: ubah CONFIG.fotoUrl di bagian script -->
+    <img
+      id="p2-foto"
+      class="photo"
+      src="https://i.imgur.com/6VBx8MA.png"
+      alt="Foto Orang Tersayang"
+      onerror="this.src='https://placehold.co/200x200/ff99cc/fff?text=💕'"
+    />
+    <h2 id="p2-title" class="h2-title">Selamat Ulang Tahun 🎂</h2>
+    <p id="p2-pesan" class="romantis">
+      Di antara banyaknya hari, kamu adalah alasan mengapa hari terasa lebih indah. <br><br>
+      Semoga langkahmu selalu ringan, hatimu selalu hangat,<br>
+      dan senyummu tak pernah kehilangan alasan. <br><br>
+      Semoga setiap impianmu menjadi nyata, dan kebahagiaan<br>
+      selalu mengikuti ke mana pun kamu melangkah. 🌸 <br><br>
+      <strong>Selamat bertambah usia 🤍</strong>
+    </p>
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
+      🎵 Putar Lagu Ulang Tahun
+    </button>
+  </div>
+
+  <!-- YouTube player tersembunyi -->
+  <iframe
+    id="yt-player"
+    src=""
+    allow="autoplay"
+    title="Selamat Ulang Tahun"
+  ></iframe>
+
+  <script>
+    // ╔══════════════════════════════════════════════════════════════════════╗
+    // ║  ✏️  KONFIGURASI — Edit bagian ini untuk mengubah nama, foto,      ║
+    // ║     pesan, dan lagu. Semua yang perlu diubah ada di sini!          ║
+    // ╠══════════════════════════════════════════════════════════════════════╣
+    var CONFIG = {
+      // Nama orang yang berulang tahun (muncul di judul halaman 1 & 2)
+      nama: 'Kamu',
+
+      // URL foto di halaman 2
+      // → Upload foto ke https://imgur.com lalu paste link langsung-nya di sini
+      fotoUrl: 'https://i.imgur.com/6VBx8MA.png',
+
+      // Pesan singkat di halaman pertama (boleh gunakan <br> untuk baris baru)
+      pesanAwal: 'Hari ini adalah hari yang spesial,<br>karena hari ini kamu dilahirkan.',
+
+      // Kalimat ucapan terima kasih di halaman pertama
+      pesanKartu: 'Terima kasih sudah menjadi seseorang yang begitu berarti.',
+
+      // Pesan panjang di halaman kedua (boleh gunakan <br> untuk baris baru)
+      pesanRomantis:
+        'Di antara banyaknya hari, kamu adalah alasan mengapa hari terasa lebih indah. <br><br>' +
+        'Semoga langkahmu selalu ringan, hatimu selalu hangat,<br>' +
+        'dan senyummu tak pernah kehilangan alasan. <br><br>' +
+        'Semoga setiap impianmu menjadi nyata, dan kebahagiaan<br>' +
+        'selalu mengikuti ke mana pun kamu melangkah. 🌸 <br><br>' +
+        '<strong>Selamat bertambah usia 🤍</strong>',
+
+      // ID video YouTube — ambil dari URL: youtube.com/watch?v=[ID_DI_SINI]
+      youtubeId: 'MWfKVAep1ew',
+    };
+    // ╚══════════════════════════════════════════════════════════════════════╝
+
+    // ─── Terapkan CONFIG ke halaman ──────────────────────────────────────────
+    document.title = 'Untuk ' + CONFIG.nama + ' ❤️';
+    document.getElementById('p1-title').textContent = 'Selamat Ulang Tahun ' + CONFIG.nama + ' 🎉';
+    document.getElementById('p1-msg1').innerHTML = CONFIG.pesanAwal;
+    document.getElementById('p1-msg2').textContent = CONFIG.pesanKartu;
+    document.getElementById('p2-title').textContent = 'Selamat Ulang Tahun ' + CONFIG.nama + ' 🎂';
+    document.getElementById('p2-foto').src = CONFIG.fotoUrl;
+    document.getElementById('p2-pesan').innerHTML = CONFIG.pesanRomantis;
+    var safeYtId = CONFIG.youtubeId.replace(/[^a-zA-Z0-9_-]/g, '');
+    document.getElementById('yt-player').src =
+      'https://www.youtube.com/embed/' + safeYtId + '?enablejsapi=1&autoplay=0';
+
+    // ─── Navigasi antar halaman ───────────────────────────────────────────────
+    function nextPage() {
+      var p1 = document.getElementById('page1');
+      var p2 = document.getElementById('page2');
+      p1.style.opacity = '0';
+      p1.style.pointerEvents = 'none';
+      p2.classList.add('active');
+    }
+
+    // ─── Kontrol musik via postMessage ke YouTube iframe ──────────────────────
+    var isPlaying = false;
+    var player = document.getElementById('yt-player');
+
+    function toggleMusic() {
+      var btn = document.getElementById('musicBtn');
+      if (!player || !player.contentWindow) { return; }
+      if (!isPlaying) {
+        // Mulai putar
+        player.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
+          'https://www.youtube.com'
+        );
+        btn.textContent = '⏸ Pause Lagu';
+        btn.classList.add('playing');
+        isPlaying = true;
+      } else {
+        // Pause
+        player.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }),
+          'https://www.youtube.com'
+        );
+        btn.textContent = '🎵 Putar Lagu Ulang Tahun';
+        btn.classList.remove('playing');
+        isPlaying = false;
+      }
+    }
+
+    // ─── Hujan ❤️ & 🌸 ────────────────────────────────────────────────────────
+    var emojis = ['❤️', '🌸', '💕', '✨', '🎂', '🎉'];
+    for (var i = 0; i < 60; i++) {
+      (function() {
+        var el = document.createElement('div');
+        var emoji = emojis[Math.floor(Math.random() * emojis.length)];
+        el.className = (emoji === '🌸' || emoji === '🎂' || emoji === '🎉') ? 'bunga' : 'love';
+        el.textContent = emoji;
+        var left = Math.random() * 100;
+        var delay = Math.random() * 10;
+        var duration = 5 + Math.random() * 6;
+        el.style.left = left + 'vw';
+        el.style.animationDelay = delay + 's';
+        el.style.animationDuration = duration + 's';
+        document.body.appendChild(el);
+      })();
+    }
+  </script>
+</body>
+</html>
